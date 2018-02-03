@@ -9,18 +9,18 @@ and then render the corresponding checkerboard.
 class CheckerBoard extends React.Component {
 
   state = {
-    size: 12,
+    size: 10,
     colorA: 'black',
     colorB: 'red'
   }
 
   styles = {
     cell: {
-      height: '20px',
-      width: '20px',
+      height: '25px',
+      width: '25px',
       display:'inline-block'
     },
-    row: {height: '20px'}
+    row: {height: '25px'}
   }
 
   Cell = props => React.createElement('div', props)
@@ -75,7 +75,7 @@ class CheckerBoard extends React.Component {
     let {color} = props
     return React.createElement('select', {
       value: this.state[color],
-      onChange: this[color + 'Update'],
+      onChange: this.updateColor[color].bind(this),
       style: {width: 60}
     },
       React.createElement('option', {value: 'black'}, 'Black'),
@@ -90,8 +90,10 @@ class CheckerBoard extends React.Component {
     )
   }
 
-  colorAUpdate = event => this.setState({colorA: event.target.value})
-  colorBUpdate = event => this.setState({colorB: event.target.value})
+  updateColor = {
+    colorA: event => this.setState({colorA: event.target.value}),
+    colorB: event => this.setState({colorB: event.target.value})
+  }
   
   Control = props => {
     return React.createElement('div', null, 
@@ -108,8 +110,8 @@ class CheckerBoard extends React.Component {
 
   render() {
     return React.createElement('div', null,
-    React.createElement(this.Control, null),
-    React.createElement(this.Board, null),
+      React.createElement(this.Control, null),
+      React.createElement(this.Board, null)
     )
   }
 
