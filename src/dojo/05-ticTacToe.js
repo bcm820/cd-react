@@ -14,11 +14,14 @@ class TicTacToe extends React.Component {
     bot: ['', '', '']
   }
 
+  current = 'X'
+
   styles = {
     row: {margin: 0, height: 80},
     box: {
       width: 80, height: 80,
-      position: 'absolute'
+      position: 'absolute',
+      fontSize: 50
     }
   }
 
@@ -26,10 +29,11 @@ class TicTacToe extends React.Component {
     let state = this.state
     const idx = parseInt(event.target.id, 10)
     let pos = event.target.className
-    if (state[pos][idx] === '') state[pos][idx] = 'X'
-    else if (state[pos][idx] === 'X') state[pos][idx] = 'O'
-    else state[pos][idx] = ''
+    state[pos][idx] = this.current
     this.setState(state)
+    this.current === 'X'
+    ? this.current = 'O'
+    : this.current = 'X'
   }
 
   Box = ({style, className, id}) => {
@@ -70,17 +74,16 @@ class TicTacToe extends React.Component {
     if (top[0] === mid[1] && top[0] === bot[2]) winner = top[0]
     if (top[2] === mid[1] && top[2] === bot[0]) winner = top[2]
     return winner
-    ? React.createElement('h2', null, `${winner} wins!`)
-    : React.createElement('h2', null)
+    ? React.createElement('h1', null, `${winner} wins!`)
+    : React.createElement('h1', null)
   }
 
   render() {
     return React.createElement('div', null,
+      React.createElement('h1', null, `Next player: ${this.current}`),
       React.createElement(this.Row, {className: 'top'}),
       React.createElement(this.Row, {className: 'mid'}),
       React.createElement(this.Row, {className: 'bot'}),
-      React.createElement('h3', null, 'X - Player 1'),
-      React.createElement('h3', null, 'O - Player 2'),
       React.createElement(this.Result, null)
     )
   }
