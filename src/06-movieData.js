@@ -11,16 +11,17 @@ class MovieData extends React.Component {
 
   state = {
     movie: '',
-    results: []
+    results: [],
+    err: null
   }
 
   search = () => {
     axios.get(`http://www.omdbapi.com/?apikey=7ad03c78&s=${this.state.movie}`)
     .then(res => {
-      console.log(res)
-      this.setState({results: res.data.Search})
+      res.data.Response === 'True'
+      ? this.setState({results: res.data.Search})
+      : this.setState({results: res.data.Error})
     })
-    .catch(err => console.log(err))
   }
 
   render() {
@@ -31,7 +32,9 @@ class MovieData extends React.Component {
         onKeyPress={event => event.key === 'Enter' ? this.search() : false}
       />
       <button onClick={this.search}>Search</button>
-      <div>
+      {
+        Array.isArray(this.state.results)
+        ? <div>
           {this.state.results.map(movie => {
             return (
               <div key={movie.imdbID}><br/>
@@ -41,7 +44,9 @@ class MovieData extends React.Component {
             )
           })
         }
-      </div>
+        </div>
+        : <p>{this.state.results}</p>
+      }
     </div>
   }
 }
