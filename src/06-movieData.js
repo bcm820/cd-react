@@ -1,12 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-/*
-  TicTacToe without peeking at FB's tutorial
-  We out here to code, not copy pasta
-  Of course, I'll check it out afterwards :)
-*/
-
 class MovieData extends React.Component {
 
   state = {
