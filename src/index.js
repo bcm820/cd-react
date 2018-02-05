@@ -16,5 +16,5 @@ import ReactDOM from 'react-dom';
 // import TicTacToe from './05-ticTacToe'
 // ReactDOM.render(<TicTacToe/>, document.getElementById('root'))
 
-import ProjectLog from './06-projectLog/ProjectLog'
-ReactDOM.render(<ProjectLog/>, document.getElementById('root'))
+import MovieData from './06-movieData'
+ReactDOM.render(<MovieData/>, document.getElementById('root'))
