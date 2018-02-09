@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vanilla Redux Counter</title>
+</head>
+<body>
+    <div>Counter: <span id="counter"></span></div>
+    <button id="dec">Decrement</button>
+    <button id="inc">Increment</button>
+
+    <script>
+
+    // A simple counter that will be updated via Redux pattern
+    let state = { counter: 0 }
+
+    // Render function alerts the view to a new state (starting with page load)
+    const render = () => document.getElementById('counter').innerText = state.counter
+    render()
+    
+    // Actions to 'dispatch'
+    // Actions are simple objects that describe an event taking place
+    // Every action has a type property
+    const increment = { type: 'INC' }
+    const decrement = { type: 'DEC' }
+    
+    // A reducer to help determine the state change
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case 'INC': return { counter: state.counter + 1 }
+            case 'DEC': return { counter: state.counter - 1 }
+            default: return state
+        }
+    }
+    
+    // The dispatch function that sets our state to an updated version
+    // Initially we can call the render function again, but we should decouple later
+    const dispatch = action => {
+        state = reducer(state, action)
+        render()
+    }
+    
+    // Now we attach event emitters to our buttons to call dispatch
+    document.getElementById('inc').onclick = () => dispatch(increment)
+    document.getElementById('dec').onclick = () => dispatch(decrement)
+
+    </script>
+
+    </body>
+</html>

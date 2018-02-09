@@ -6,6 +6,6 @@ import ReactDOM from 'react-dom';
 // import VotingApp from './03-votingApp'
 // import Counters from './04-counters'
 // import TicTacToe from './05-ticTacToe'
-// import MovieData from './06-movieData'
+import MovieData from './06-movieData'
 
-ReactDOM.render(<BasicExample/>, root)
+ReactDOM.render(<MovieData/>, root)
