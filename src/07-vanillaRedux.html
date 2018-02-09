@@ -15,19 +15,22 @@
     <script>
 
     // Render function alerts the view to a new state
-    const render = state => document.getElementById('counter').innerText = state.counter
-    render({ counter: 0 })
+    const render = state => document.getElementById('counter').innerText = state
     
+    // render our initial state
+    // Note: In this example, state is just a simple number, not an object
+    render(0)
+
     // Actions to 'dispatch'
     // Simple objects that describe an event taking place
     const increment = { type: 'INC' }
     const decrement = { type: 'DEC' }
     
     // A reducer to help determine the state change
-    const reduce = (state = { counter: 0 }, action) => {
+    const reduce = (state = 0, action) => {
         switch (action.type) {
-            case 'INC': return { counter: state.counter + 1 }
-            case 'DEC': return { counter: state.counter - 1 }
+            case 'INC': return state + 1
+            case 'DEC': return state - 1
             default: return state
         }
     }
